@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo</title>
+</head>
+<fieldset>
+    <legend>Draws</legend>
+    <table>
+        <tr>
+            <td>Artifact</td>
+            <td>
+                <select id="artifact">
+                    <option value="0">Tam giac goc 1</option>
+                    <option value="1">Tam giac goc 2</option>
+                    <option value="2">Tam giac goc 3</option>
+                    <option value="3">Tam giac goc 4</option>
+                    <option value="4">Hinh Vuong</option>
+                    <option value="5">Hinh trai tim</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Width</td>
+            <td>
+                <input id="width" type="text" value="10">
+            </td>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td>
+                <input id="height" type="text" value="10">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Stroke
+            </td>
+            <td>
+                <select id="stroke">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value=".">.</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Fill</td>
+            <td>
+                <input checked id="fill" type="checkbox">
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <pre id="draw"></pre>
+    <button onclick="draw()">Draw</button>
+</fieldset>
+
+<body>
+
+	<script>
+		
+		function draw(){
+			    let width = +document.getElementById("width").value;
+			    let height = +document.getElementById("height").value;
+			    let stroke = document.getElementById("stroke").value;
+			    let fill = document.getElementById("fill").checked;
+			    let drawing = document.getElementById("draw");
+			    let artifact = document.getElementById('artifact').value;
+			    drawing.innerText = "";
+			    stroke += " ";
+
+			    if (artifact == 0) {
+			    		for (let rowIndex = 0; rowIndex < height; rowIndex++) {
+			    			for (let j = 0; j <= rowIndex ; j++) {
+			    				if (fill) {
+				                drawing.innerText += stroke;
+					            } else {
+					                let isBorder = rowIndex == j
+					                ||j == 0
+					                ||rowIndex == height - 1;
+					                drawing.innerText += isBorder ? stroke : "  ";
+					            }
+			    			}
+			    			drawing.innerHTML += "<br>";
+			    		}
+			    }else {
+
+			    		for (let rowIndex = 0; rowIndex < height; rowIndex++) {
+				        for (let colIndex = 0; colIndex < width; colIndex++) {
+				            if (fill) {
+				                drawing.innerText += stroke;
+				            } else {
+				                let isBorder = rowIndex === 0
+				                    || rowIndex === height - 1
+				                    || colIndex === 0
+				                    || colIndex === width - 1;
+				                drawing.innerText += isBorder ? stroke : "  ";
+				            }
+				        }
+				        drawing.innerHTML += "<br>";
+				    }
+
+			    }
+
+				    
+
+
+		}
+
+	</script>
+</body>
+</html>
